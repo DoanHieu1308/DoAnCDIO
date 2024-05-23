@@ -1,0 +1,93 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary meta tags -->
+
+    <title>Bully BarberShop Login</title>
+    <meta name="title" content="Bully BarberShop">
+
+    <!-- Favicon -->
+
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <!-- Custom CSS link -->
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+
+    <!-- Google font link -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik:wght@300,400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Flaticon -->
+
+    <link rel="stylesheet" href="assets/css/flaticon.min.css">
+    
+    <!-- Preload images -->
+
+    <link rel="preload" as="img" href="./assets/images/hero-banner.jpg">
+
+</head>
+  <body>
+    <!-- form login -->
+    <div class="login">
+
+      <div class="login__container">
+        <h1>Log In</h1>
+
+        <form>
+          <h5>Username</h5>
+          <input type="text" class="input-login-username"  id="name"/>
+          <h5>Password</h5>
+          <input type="password" class="input-login-password" id="matkhau"/>
+          <button type="submit" class="login__signInButton" id="submit">Log In</button>
+        </form>
+        
+      </div>
+
+    </div>
+
+  </body>
+  <script>
+    $(document).ready(function() {
+      
+      $('#submit').click(function(event) {
+        event.preventDefault(); // Ngăn chặn form submit thực sự để xử lý lấy dữ liệu trước
+
+        // Lấy giá trị từ các input
+        var name = $('#name').val();
+        var matkhau=$("#matkhau").val();
+
+        // Gửi dữ liệu lên server qua AJAX
+        $.ajax({
+          url: 'http://localhost:3000/admin/login',
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({
+              tenDangNhap:name,
+              matKhau:matkhau,
+          }),
+          success: function(response) {
+              alert("Đăng Nhập Thành công")
+              window.location.href = "dashboard.html";
+          },
+          error: function(error) {
+            alert("Đăng Nhập Thất bại");
+          }
+        });
+      });
+    });
+</script>
+
+  <script src="./js/main.js"></script>
+</html>
